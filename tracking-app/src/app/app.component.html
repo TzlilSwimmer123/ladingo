@@ -1,0 +1,77 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+<div class="row shop-tracking-status">
+
+  <div class="col-md-12">
+    <div class="well">
+
+      <h4>Your order status:</h4>
+
+      <div class="order-status">
+
+        <div class="order-status-timeline">
+          <div class="order-status-timeline-completion c3"></div>
+        </div>
+
+        <div class="image-order-status image-order-status-new active img-circle">
+          <span class="status">Exit warehouse</span>
+          <div class="icon"></div>
+        </div>
+        <div class="image-order-status image-order-status-active active img-circle">
+          <span class="status">Loaded on ship</span>
+          <div class="icon"></div>
+        </div>
+        <div class="image-order-status image-order-status-intransit active img-circle">
+          <span class="status">Ship left the harbor</span>
+          <div class="icon"></div>
+        </div>
+        <div class="image-order-status image-order-status-delivered active img-circle">
+          <span class="status">Ship anchored</span>
+          <div class="icon"></div>
+        </div>
+        <div class="image-order-status image-order-status-completed active img-circle">
+          <span class="status">Item delivered</span>
+          <div class="icon"></div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-info" (click)="showDetails()">{{ fullDetails ? 'Hide all tracking details' : 'See all tracking details' }}</button>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="a-container" *ngIf="fullDetails">
+
+  <div class="a-row tracking-event-carrier-header">
+    <h2 class="a-spacing-small a-spacing-top-medium">
+      Shipped with Ladingo
+    </h2>
+  </div>
+
+
+  <div class="a-row tracking-event-trackingId-text">
+    <h4 class="a-spacing-medium">
+      Tracking ID: AGSIPNJ0062961714
+    </h4>
+  </div>
+
+  <div class="a-row" *ngFor="let step of trackingDetailsDates">
+    <div class="tracking-event-date-header">
+      <span class="tracking-event-date">{{ step }}</span>
+    </div>
+
+    <ul class="a-row" *ngFor="let time of trackingDetails[step]">
+      <li>
+        <div>
+          <span class="time">{{ dateProvider.formatTime(time) }}</span>
+          <span class="title">{{ getStepTitle(time) }}</span>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<router-outlet></router-outlet>
